@@ -115,3 +115,67 @@ con un limite
 docker logs --tail <n> -f <container_name>
 
 ```
+
+## 06
+
+Bind Mounts -> herramienta para montar directorios y guardar espejos de la informacion
+
+
+
+
+-- Comando para crear un contenedor en background de MongoDB con un custom name
+
+```sh
+
+docker run -d --name db <custom_name>
+
+```
+
+-- Comando para ver los contenedores activos
+
+```sh
+
+docker ps
+
+```
+
+-- Comando para entrar al bash del contenedor
+-- la flag -it hace referencia al modo interactivo
+
+```sh
+
+docker exec -it <container_name> bash
+```
+
+-- Comando en el bash del contenedor para correrlo
+
+```sh
+
+mongosh
+
+```
+
+-- Comando en eliminar un contenedor corriendo
+
+```sh
+
+docker rm -f <container_name>
+
+```
+
+
+-- Comando para crear un volumen de Docker
+
+```sh
+
+docker volume create --name <volume_name>
+
+```
+
+-- Comando para montar el volumen sea que tenga informacion o no a un contenedor
+
+```sh
+
+docker run -d --name db -v <volume_name>:<internal_container_path_data> <image>
+
+```
