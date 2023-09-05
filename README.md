@@ -94,7 +94,7 @@ Kill  2474
 
 Exponiendo contenedores
 
--- Para correr un contenedor y exponerlo 
+-- Para correr un contenedor y exponerlo
 -- es neceario usar un servidor web o proxy
 
 -- Cada contenedor tiene su propia interfaz de red,
@@ -119,9 +119,6 @@ docker logs --tail <n> -f <container_name>
 ## 06
 
 Bind Mounts -> herramienta para montar directorios y guardar espejos de la informacion
-
-
-
 
 -- Comando para crear un contenedor en background de MongoDB con un custom name
 
@@ -163,6 +160,9 @@ docker rm -f <container_name>
 
 ```
 
+## 07
+
+Asociando volumenes a los contenedores
 
 -- Comando para crear un volumen de Docker
 
@@ -179,3 +179,77 @@ docker volume create --name <volume_name>
 docker run -d --name db -v <volume_name>:<internal_container_path_data> <image>
 
 ```
+
+## 08
+
+-- Comando para copiar un archivo de la maquina anfitriona
+-- a un folder del contenedor
+
+```sh
+docker cp <file_name> <container_name>:<internal_container_path>
+```
+
+-- Comando para copiar un archivo desde el contenedor
+-- a la maquina anfitriona
+
+```sh
+docker cp <container_name>:<internal_container_path> <file_name_path>
+```
+
+## 09
+
+-- Comando para descargar una imagen de Docker Hub
+
+```sh
+docker pull <image_name>:<tag>
+```
+
+-- Comando para construir una imagen de Docker a
+-- partir de un Dockerfile que esta en la misma carpeta de ejecucion
+-- del comando
+
+```sh
+docker build -t <name_image>:<tag> .
+```
+
+-- Dockefile para crear una imagen a partir de Ubuntu
+-- que crea un archivo hello-world.txt en built time
+
+hint: Cada ejecucion de un comando crea una capa en la imagen
+
+```dockerfile
+FROM ubuntu:latest
+
+RUN touch /usr/src/hello-word.txt
+
+```
+
+-- Comando para entrar en modo interactivo de un contenedor
+-- en tiempo de ejecucion
+
+```sh
+docker run -it <image_name>:<tag>
+```
+
+-- Comando para ver el historial de capaz de una imagen y la ultima
+-- capa obedece a la ultima linea de ejucion de la imagen lo que es lo
+-- mismo que un tag
+
+```sh
+docker history <image_name>
+```
+
+-- Comando para retaggear una imagen
+
+```sh
+docker tag  <image_name>:<tag> <user_repository>/<image_name>:<tag>
+
+```
+
+-- Comando para subir una imagen al repositorio publico
+
+```sh
+docker push <user_repository>/<image_name>:<tag> 
+```
+
+### hint: USAR DIVE PARA INSPECCIONAR A PROFUNDIDAD UNA IMAGEN
